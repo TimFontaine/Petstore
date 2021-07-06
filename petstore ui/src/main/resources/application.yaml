@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+  application.name: petstore-web
+  cloud:
+    kubernetes:
+      reload.enabled: true
+      secrets.name: test-security-secret
+    loadbalancer:
+      ribbon:
+        enabled: false
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true

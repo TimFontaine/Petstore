@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: petstore-web
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    protocol: TCP
+    nodePort: 30001
+  selector:
+    app: petstore-web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petstore-web
+  labels:
+    app: petstore-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petstore-web
+  template:
+    metadata:
+      labels:
+        app: petstore-web
+    spec:
+      containers:
+      - name: petstore
+        image: playground/petstore-web
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+
